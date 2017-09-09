@@ -63,19 +63,19 @@ assuming it is a local connection and the database is called 'yousician'.
 
 ## Launching to local development
 
-To local test/development launching just run the script `start_dev.sh` (ensure the .env file exists)
+To local test/development launching just run the script `aufziehen.sh` (ensure the .env file exists)
 
 To run in development mode:
 
 ```sh
-$ sudo chmod +x start_dev.sh
+$ sudo chmod +x aufziehen.sh
 $ ./aufziehen.sh dev
 ```
 
 To run in production mode:
 
 ```sh
-$ sudo chmod +x start_dev.sh
+$ sudo chmod +x aufziehen.sh
 $ ./aufziehen.sh prod
 ```
 
