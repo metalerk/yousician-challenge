@@ -2,7 +2,7 @@
 
 API REST made as test challenge for Yousician.
 
-## Setting the local environment
+## Setting up the local environment
 
 To setup create a virtual environment with the right dependencies as follows:
 
