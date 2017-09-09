@@ -1,8 +1,6 @@
 from flask_restful import Resource
 from flask import jsonify
-from flask import request
 from flask_pymongo import pymongo
-from pprint import pprint
 from math import ceil
 
 class SongList(Resource):
@@ -111,15 +109,29 @@ class SongDifficulty(Resource):
 
 class SongSearch(Resource):
 
-    def get(self):
+    def __init__(self, db):
+        self.db = db
+        self.qs = self.db.songs
+        self.message = None
+
+    def get(self, message):
+
+        self.message = message
+
         return jsonify({
-            'ping': 'pong'
+            'songs': self.search_queryset
         })
 
-    def post(self):
-        return jsonify({
-            'ping': 'pong'
-        })
+    @property
+    def search_queryset(self):
+        self.qs = self.qs.find({ 
+            '$or': [
+                    {'artist': {'$regex': r'(?i){}'.format(self.message) }}, 
+                    {'title': {'$regex': r'(?i){}'.format(self.message) }} 
+            ]}, 
+            {'_id': 0})
+
+        return list(self.qs) if self.qs else []
 
 class SongRating(Resource):
 
