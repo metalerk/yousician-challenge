@@ -12,20 +12,20 @@ class SongList(Resource):
         self.qs = self.db.songs.find({}, {'_id': 0})
         self.page = None
         self.per_page = None
+        self.pages = None
 
     def get(self, page=None, per_page=2):
 
         if page is not None:
 
-            if page > 1:
-                self.page = page
-            else:
-                self.page = 1
-
-            self.per_page = per_page
+            self.page = page if page > 1 else 1
+            
+            self.per_page = per_page if per_page > 1 else 1
 
             response = {
-                'page': self.page,
+                'current_page': self.page,
+                'total_pages': self.pages,
+                'songs_per_page': self.per_page,
                 'songs' : [song for song in self.queryset_pagination]
             } if self.queryset_pagination is not None else {
                 'error': 'Page not found'
@@ -48,12 +48,11 @@ class SongList(Resource):
     @property
     def queryset_pagination(self):
 
-        total_count = self.qs.count() - 1
-        pages = int(ceil(total_count / float(self.per_page)))
-        print(pages)
+        total_count = self.qs.count()
+        self.pages = int(ceil(total_count / float(self.per_page)))
         start =  (self.page * self.per_page) - self.per_page
 
-        if self.page > pages + 1:
+        if self.page > self.pages:
             return None
         
         else:
@@ -61,15 +60,54 @@ class SongList(Resource):
 
 class SongDifficulty(Resource):
 
-    def get(self):
-        return jsonify({
-            'ping': 'pong'
-        })
+    def __init__(self, db):
+        self.db = db
+        self.level = None
+        self.qs = self.db.songs
 
-    def post(self):
-        return jsonify({
-            'ping': 'pong'
-        })
+    def get(self, level=None):
+
+        self.level = level
+
+        if self.level is not None:
+            response = {
+                'average_difficulty': self.filtered_avg_diff
+            }
+        else:
+            response = {
+                'average_difficulty': self.get_avg_diff
+            }
+
+        return jsonify(response)
+
+    @property
+    def get_avg_diff(self):
+
+        self.qs = self.qs.aggregate([{
+            "$group": {
+                "_id": None, 
+                "avg_diff": { "$avg": "$difficulty" } 
+            } 
+        }])
+
+        return int(list(self.qs)[0]['avg_diff'])
+
+    @property
+    def filtered_avg_diff(self):
+
+        self.qs = self.qs.aggregate([
+            { "$match": {
+                "level": self.level
+            }},
+            {"$group": {
+                "_id": None, 
+                "avg_diff": { "$avg": "$difficulty"},
+            } 
+        }])
+
+        res_qs = list(self.qs)
+
+        return int(res_qs[0]['avg_diff']) if res_qs else 0
 
 class SongSearch(Resource):
 
