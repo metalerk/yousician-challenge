@@ -12,20 +12,20 @@ class SongList(Resource):
         self.qs = self.db.songs.find({}, {'_id': 0})
         self.page = None
         self.per_page = None
+        self.pages = None
 
     def get(self, page=None, per_page=2):
 
         if page is not None:
 
-            if page > 1:
-                self.page = page
-            else:
-                self.page = 1
-
-            self.per_page = per_page
+            self.page = page if page > 1 else 1
+            
+            self.per_page = per_page if per_page > 1 else 1
 
             response = {
-                'page': self.page,
+                'current_page': self.page,
+                'total_pages': self.pages,
+                'songs_per_page': self.per_page,
                 'songs' : [song for song in self.queryset_pagination]
             } if self.queryset_pagination is not None else {
                 'error': 'Page not found'
@@ -48,12 +48,11 @@ class SongList(Resource):
     @property
     def queryset_pagination(self):
 
-        total_count = self.qs.count() - 1
-        pages = int(ceil(total_count / float(self.per_page)))
-        print(pages)
+        total_count = self.qs.count()
+        self.pages = int(ceil(total_count / float(self.per_page)))
         start =  (self.page * self.per_page) - self.per_page
 
-        if self.page > pages + 1:
+        if self.page > self.pages:
             return None
         
         else:

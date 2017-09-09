@@ -10,6 +10,7 @@ import random
 import string
 
 app = Flask(__name__)
+
 api = Api(app)
 
 app.config['DEBUG'] = True
