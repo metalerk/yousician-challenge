@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_restful import Resource, Api, reqparse
+from flask_restful import Api, reqparse
 from pymongo import MongoClient
 
 from api.songs import SongList
