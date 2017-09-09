@@ -69,14 +69,14 @@ To run in development mode:
 
 ```sh
 $ sudo chmod +x start_dev.sh
-$ ./start_dev.sh dev
+$ ./aufziehen.sh dev
 ```
 
 To run in production mode:
 
 ```sh
 $ sudo chmod +x start_dev.sh
-$ ./start_dev.sh prod
+$ ./aufziehen.sh prod
 ```
 
 ### Testing
@@ -84,7 +84,7 @@ $ ./start_dev.sh prod
 To run all tests:
 
 ```sh
-$ ./start_dev.sh test
+$ ./aufziehen.sh test
 ```
 
 ## API Reference
