@@ -59,7 +59,7 @@ The .env file scaffold is:
 MONGODB_URI=mongodb://127.0.0.1:27017
 MONGODB_DBNAME=yousician
 ```
-assuming it is a local connection and the database is called 'yousician'.
+assuming it is a local connection and the database is named 'yousician' and the collection is named 'songs'.
 
 ## Launching to local development
 
