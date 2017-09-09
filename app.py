@@ -6,6 +6,7 @@ from flask import jsonify
 from api.songs import SongList
 from api.songs import SongDifficulty
 from api.songs import SongSearch
+from api.songs import SongRating
 
 import os
 import random
@@ -27,6 +28,7 @@ db = client[app.config['MONGO_DBNAME']]
 api.add_resource(SongList, '/songs', '/songs/<int:page>', '/songs/<int:page>/<int:per_page>', resource_class_kwargs={'db' : db})
 api.add_resource(SongDifficulty, '/songs/avg/difficulty', '/songs/avg/difficulty/<int:level>', resource_class_kwargs={'db' : db})
 api.add_resource(SongSearch, '/songs/search/<string:message>', resource_class_kwargs={'db' : db})
+api.add_resource(SongRating, '/songs/rating/<string:song_id>/<int:rating>', resource_class_kwargs={'db' : db})
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=8080, debug=True)
