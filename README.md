@@ -37,7 +37,7 @@ To activate:
 $ source env/bin/activate
 ```
 
-To deactivate after using:
+To deactivate after use:
 
 ```sh
 $ deactivate
