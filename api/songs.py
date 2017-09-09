@@ -1,3 +1,10 @@
+
+# I know this is not the best code you've seen before (neither the best I've done) but I did it in almost two days
+# because there was an earthquake in my homeland and I finished it as soon as possible to go as a volunteer and help
+
+# As a comment, I prefer to use some methods like __len__() instead built-in len() because I read once __len__() is
+# faster than len(). I also prefer to use __str__() than str() but in this case just because it seems cooler :P
+
 from flask_restful import Resource
 from flask import jsonify
 from bson.objectid import ObjectId
@@ -44,6 +51,10 @@ class SongList(Resource):
         return jsonify(response)
 
     def head(self):
+        """
+        This returns a header NUMBER_OF_SONGS to query the amount of songs and decide if it worths to do the GET request
+        or just want to know the number of songs.
+        """
         
         return {}, 200, {'NUMBER_OF_SONGS': self.qs.count()}
 
@@ -236,6 +247,8 @@ class SongAverage(Resource):
                     { '_id': 0, 'avg': { '$avg': '$rating'}, 'min': {'$min' : '$rating'}, 'max': {'$max' : '$rating'}}
                 }
             ])
+
+        # rqs is stored in a new variable called res because it is a generator.
 
         res = list(rqs)
 
