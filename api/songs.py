@@ -162,9 +162,15 @@ class SongRating(Resource):
     def rate_song(self, song_id, rating):
         song = self.qs.find_one({"_id": ObjectId(song_id)})
 
-        if song is not None:
+        if song:
+            
+            if not 'rating' in song:
+                song['rating'] = list()
+                song['rating'].append(rating)
 
-            song['rating'] = rating
+            else:
+                song['rating'].append(rating)
+
             self.qs.save(song)
 
             return True
