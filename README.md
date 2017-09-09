@@ -93,9 +93,9 @@ $ ./aufziehen.sh test
   - Returns a list of songs with some details on them
   
   @params:
-    * **page** : int <br>
+    * **page** : int (optional) <br>
     Display a specific page
-    * **per_page** : int <br>
+    * **per_page** : int (optional) <br>
     Specify how much items are displayed on each page
 
   @return:
