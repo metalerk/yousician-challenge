@@ -2,7 +2,7 @@
 
 API REST made as test challenge for Yousician.
 
-## Setting the local environment
+## Setting up the local environment
 
 To setup create a virtual environment with the right dependencies as follows:
 
@@ -37,7 +37,7 @@ To activate:
 $ source env/bin/activate
 ```
 
-To deactivate after using:
+To deactivate after use:
 
 ```sh
 $ deactivate
@@ -63,19 +63,19 @@ assuming it is a local connection and the database is called 'yousician'.
 
 ## Launching to local development
 
-To local test/development launching just run the script `start_dev.sh` (ensure the .env file exists)
+To local test/development launching just run the script `aufziehen.sh` (ensure the .env file exists)
 
 To run in development mode:
 
 ```sh
-$ sudo chmod +x start_dev.sh
+$ sudo chmod +x aufziehen.sh
 $ ./aufziehen.sh dev
 ```
 
 To run in production mode:
 
 ```sh
-$ sudo chmod +x start_dev.sh
+$ sudo chmod +x aufziehen.sh
 $ ./aufziehen.sh prod
 ```
 
@@ -90,22 +90,22 @@ $ ./aufziehen.sh test
 ## API Reference
 
 - GET /songs
-  Returns a list of songs with some details on them
+  - Returns a list of songs with some details on them
   
   @params:
-    * **page** <int>
+    * **page** : int <br>
     Display a specific page
-    * **per_page** <int>
+    * **per_page** : int <br>
     Specify how much items are displayed on each page
 
   @return:
-    * **songs** <array>
+    * **songs** : array <br>
     Contains the song objects list.
-    * **total** <int>
+    * **total** : int <br>
     Number of song objects.
-    * **current_page** <int> (optional)
+    * **current_page** : int (optional) <br>
     Show current page only if page and per_page parameters are provided.
-    * **total_pages** <int> (optional)
+    * **total_pages** : int (optional)<br>
     Show total pages only if page and per_page parameters are provided.
     
   Example:
@@ -124,12 +124,12 @@ $ ./aufziehen.sh test
   - Returns the average difficulty for all songs.
   
   @params:
-    * **level** <int> (optional)
+    * **level** : int (optional) <br>
     Limits only certain items with that level.
     Specify how much items are displayed on each page.
 
   @return:
-    * **average_difficulty** <int>
+    * **average_difficulty** : int <br>
     Song average difficulty. If level is not specified it will return all songs average.
 
   Example:
@@ -143,12 +143,12 @@ $ ./aufziehen.sh test
   - Return a list of songs. It searches in song's artist and title fields and is case insensitive.
 
   @params:
-  * **message** <string>
+  * **message** : string <br>
 
   @return:
-    * **songs** <array>
+    * **songs** : array <br>
     Contains the song objects list.
-    * **total** <int>
+    * **total** : int <br>
     Number of song objects.
 
   Example:
@@ -162,13 +162,13 @@ $ ./aufziehen.sh test
   - This call adds a rating to the song. Ratings are between 1 and 5.
   
   @params:
-    * **song_id** <string>
+    * **song_id** : string <br>
     Song ID for searching. Must be 24 characters.
-    * **rating** <int>
+    * **rating** : int <br>
     Should be beetween 1 and 5
 
     @return:
-    * **updated** <boolean>
+    * **updated** : boolean <br>
     If update is done it will return ```true```, otherwise returns ```false```.
 
   Example:
@@ -181,15 +181,15 @@ $ ./aufziehen.sh test
   - Returns the average, the lowest and the highest rating of the given song id.
   
   @params:
-    * **song_id** <string>
+    * **song_id** : string <br>
     Song ID for searching. Must be 24 characters.
 
   @return:
-    * **average_rating** <int>
+    * **average_rating** : int <br>
     Average rating given to the song.
-    * **max_rating** <int>
+    * **max_rating** : int <br>
     Maximum rating value given to the song.
-    * **min_rating** <int>
+    * **min_rating** : int <br>
     Minimum rating value given to the song.
     
   Example:
