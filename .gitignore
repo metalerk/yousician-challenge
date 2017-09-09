@@ -3,5 +3,5 @@ __pycache__
 .env
 INSTRUCTIONS.md
 start.sh
-manager.py
+manage.py
 .idea
