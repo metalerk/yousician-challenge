@@ -1,7 +1,6 @@
 from flask import Flask
 from flask_restful import Resource, Api, reqparse
 from pymongo import MongoClient
-from flask import jsonify
 
 from api.songs import SongList
 from api.songs import SongDifficulty
