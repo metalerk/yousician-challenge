@@ -80,11 +80,6 @@ class SongDifficulty(Resource):
 
         return jsonify(response)
 
-    def post(self):
-        return jsonify({
-            'ping': 'pong'
-        })
-
     @property
     def get_avg_diff(self):
 
