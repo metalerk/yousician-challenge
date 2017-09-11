@@ -26,7 +26,7 @@ if [ "$1" == "test" ]; then
 elif [ "$1" == "dev" ]; then
 	start_env
 	# Test dev mode (default port: 5000)
-	python3 app.py
+	python app.py
 
 elif [ "$1" == "prod" ]; then
 	start_env
