@@ -1,16 +1,16 @@
 version: '3.8'
 
 services:
-  fastapi-app:
+  yousician_api:
     build: .
-    container_name: fastapi_https
+    container_name: yousician_api
     ports:
-      - "8443:8000"  # HTTPS port mapping
+      - "8000:8000"  # HTTPS port mapping
     environment:
       - ENV=production
-      - MONGODB_URL=mongodb://mongo:27017/fastapi_db
+      - MONGODB_URL=mongodb://mongo:27017/yousician_db
     volumes:
-      - ./app:/app  # Map local app directory for development
+      - ../app:/app  # Map local app directory for development
     depends_on:
       - mongo
     restart: unless-stopped
