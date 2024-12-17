@@ -5,3 +5,6 @@ INSTRUCTIONS.md
 start.sh
 manage.py
 .idea
+
+docker/volumes/mongo_data/*
+docker/volumes/mongo_config/*
