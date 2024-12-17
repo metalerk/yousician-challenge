@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.api.v1.routes import song
+from api.v1.routes import song
 
 
 app = FastAPI(title="Yousician API", version="1.0.0")
